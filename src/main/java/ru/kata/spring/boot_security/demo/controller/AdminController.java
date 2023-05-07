@@ -46,7 +46,8 @@ public class AdminController {
     }
 
     @GetMapping("/edit")
-    public String editUserPage(@ModelAttribute("user") User user) {
+    public String editUserPage(Model model, @ModelAttribute("user") User user) {
+        model.addAttribute("roles", roleService.getAllRoles());
         return "updateUser";
     }
 

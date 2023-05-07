@@ -15,6 +15,15 @@
     <label for="password">Enter new password: </label>
     <input type="password" th:field="*{password}" id="password"/>
     <br/>
+    <label>Roles:
+        <select th:field="*{roles}">
+            <option value=""> -- </option>
+            <option th:each="role : ${roles}"
+                    th:value="${role.id}"
+                    th:utext="${role.name}"></option>
+        </select>
+    </label>
+
     <input type="submit" value="Update"/>
 </form>
 <br/>
