@@ -2,21 +2,39 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Id</title>
+    <title>UserInfo</title>
 </head>
 <body>
-UserId:
-<p th:text="${user.getId()}">VALUE</p>
-Username:
-<p th:text="${user.getUsername()}">VALUE</p>
-
-<br/>
-<a th:href="@{/admin/edit}">Edit</a>
-<br/>
-<form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">
-    <input type="submit" value="Delete"/>
+<table class="table" border="1">
+   <thead>
+   <tr>
+       <th scope="col">Id</th>
+       <th scope="col">Username</th>
+       <th scope="col">Email</th>
+       <th scope="col">Password</th>
+       <th scope="col">Operations</th>
+   </tr>
+   </thead>
+    <tbody>
+    <tr>
+        <td th:text="${user.getId()}">VALUE</td>
+        <td th:text="${user.getUsername()}">VALUE</td>
+        <td th:text="${user.getEmail()}">VALUE</td>
+        <td th:text="${user.getPassword()}">VALUE</td>
+        <td>
+            <form th:action="@{/admin/{id}/edit(id=${user.getId()})}" method="get">
+                <input type="submit" value="Edit"/>
+            </form>
+            <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<form th:action="@{/logout}">
+    <input type="submit" value="Logout">
 </form>
-<br/>
-<a th:href="@{/logout}">Logout</a>
 </body>
 </html>

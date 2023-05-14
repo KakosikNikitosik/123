@@ -13,6 +13,7 @@ import ru.kata.spring.boot_security.demo.service.*;
 public class AdminController {
     private final UserService userService;
     private final RoleService roleService;
+
     @Autowired
     public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
@@ -45,20 +46,21 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/edit")
-    public String editUserPage(Model model, @ModelAttribute("user") User user) {
+    @GetMapping("/{id}/edit")
+    public String editUserPage(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("user", userService.findById(id));
         model.addAttribute("roles", roleService.getAllRoles());
         return "updateUser";
     }
 
-    @PatchMapping()
-    public String update(@ModelAttribute("user") User user) {
-        userService.updateUser(user);
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
+        userService.updateUser(id, user);
         return "redirect:/admin";
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") long id) {
+    public String delete(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
         return "redirect:/admin";
     }

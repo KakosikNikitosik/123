@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.Init;
+package ru.kata.spring.boot_security.demo.init;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,9 +30,9 @@ public class DbInit {
         roleService.addRole(user);
         roleService.addRole(admin);
 
-        User user1 = new User("admin", "admin", new HashSet<>(Collections.singleton(admin)));
+        User user1 = new User("admin", "admin", "admin@mail.ru", new HashSet<>(Collections.singleton(admin)));
         userService.addUser(user1);
-        User user2 = new User("user", "user", new HashSet<>(Collections.singleton(user)));
+        User user2 = new User("user", "user", "user@mail.ru", new HashSet<>(Collections.singleton(user)));
         userService.addUser(user2);
 
     }

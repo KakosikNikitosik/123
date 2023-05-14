@@ -5,14 +5,34 @@
     <title>Users</title>
 </head>
 <body>
-<div th:each="user : ${users}">
-    <a th:href="@{/admin/{id}(id=${user.getId})}" th:text="${user.getUsername}">user</a>
-
-</div>
-<br/>
-<a th:href="@{/admin/new}">Create new user</a>
-<br/>
-<a th:href="@{/logout}">Logout</a>
+<table class="table" border="1" >
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Username</th>
+        <th scope="col">Operation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getUsername}"></td>
+        <td>
+            <form th:action="@{/admin/{id}(id=${user.getId})}" method="get">
+                <input type="submit" value="UserInfo">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<form th:action="@{/admin/new}" method="get">
+    <input type="submit" value="Create new user">
+</form>
+<br>
+<form th:action="@{/logout}">
+    <input type="submit" value="Logout">
+</form>
 
 
 </body>

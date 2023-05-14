@@ -10,9 +10,11 @@
     <label for="username">Enter username: </label>
     <input type="text" th:field="*{username}" id="username"/>
     <br/>
-    <label for="password">Enter password:
-    </label>
+    <label for="password">Enter password: </label>
     <input type="password" th:field="*{password}" id="password"/>
+    <br/>
+    <label for="email">Enter email: </label>
+    <input type="text" th:field="*{email}" id="email"/>
     <br/>
     <p>
         <label>Roles:
@@ -26,8 +28,10 @@
     </p>
     <br/>
     <input type="submit" value="Create"/>
-    <br/>
-    <a th:href="@{/logout}">Logout</a>
+</form>
+<br>
+<form th:action="@{/logout}">
+    <input type="submit" value="Logout">
 </form>
 
 </body>

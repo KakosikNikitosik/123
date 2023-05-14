@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl( UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -46,15 +46,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void updateUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+    public void updateUser(Long id, User updatedUser) {
+        User userToUpdate = findById(id);
+        userToUpdate.setUsername(updatedUser.getUsername());
+        userToUpdate.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+        userToUpdate.setEmail(updatedUser.getEmail());
+        userToUpdate.setRoles(updatedUser.getRoles());
     }
 
     @Override
     @Transactional(readOnly = true)
     public User showId(Long id) {
         return userRepository.getById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public User findById(Long id) {
+        return userRepository.findById(id).orElseThrow();
+
     }
 
     @Override

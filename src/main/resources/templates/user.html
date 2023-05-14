@@ -8,11 +8,32 @@
 <h1>User, welcome spring boot security page!</h1>
 <br>
 <br>
- UserId: <p th:text="${user.getId()}">VALUE</p>
-Username: <p th:text="${user.getUsername()}">VALUE</p>
-Password: <p th:text="${user.getPassword()}">VALUE</p>
-<br/>
-<a th:href="@{/logout}">Logout</a>
+<table class="table" border="1">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Password</th>
+        <th scope="col">Role</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${user.getId()}">VALUE</td>
+        <td th:text="${user.getUsername()}">VALUE</td>
+        <td th:text="${user.getEmail()}">VALUE</td>
+        <td th:text="${user.getPassword()}">VALUE</td>
+        <td th:each="role : ${user.getRoles}"
+            th:text="${role.getName}">VALUE</td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<form th:action="@{/logout}">
+    <input type="submit" value="Logout">
+</form>
+
 
 </body>
 </html>
