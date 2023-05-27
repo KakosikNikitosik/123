@@ -25,14 +25,14 @@ public class DbInit {
 
     @PostConstruct
     public void postConstruct() {
-        Role user = new Role("ROLE_USER");
         Role admin = new Role("ROLE_ADMIN");
-        roleService.addRole(user);
+        Role user = new Role("ROLE_USER");
         roleService.addRole(admin);
+        roleService.addRole(user);
 
-        User user1 = new User("admin", "admin", "admin@mail.ru", new HashSet<>(Collections.singleton(admin)));
+        User user1 = new User("admin", "admin", 35L, "admin@mail.ru", "admin", new HashSet<>(Collections.singleton(admin)));
         userService.addUser(user1);
-        User user2 = new User("user", "user", "user@mail.ru", new HashSet<>(Collections.singleton(user)));
+        User user2 = new User("user", "user", 30L, "user@mail.ru", "user", new HashSet<>(Collections.singleton(user)));
         userService.addUser(user2);
 
     }

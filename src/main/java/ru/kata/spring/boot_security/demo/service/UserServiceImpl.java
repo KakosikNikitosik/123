@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +29,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public User findOne(String username) {
+        User user = findUser(username);
+        return user;
+    }
+
+
+    @Override
     @Transactional
     public void deleteUserById(Long id) {
         if (userRepository.findById(id).isPresent()) {
@@ -48,16 +55,13 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void updateUser(Long id, User updatedUser) {
         User userToUpdate = findById(id);
+        userToUpdate.setId(updatedUser.getId());
+        userToUpdate.setFirstName(updatedUser.getFirstName());
+        userToUpdate.setLastName(updatedUser.getLastName());
+        userToUpdate.setAge(updatedUser.getAge());
         userToUpdate.setUsername(updatedUser.getUsername());
         userToUpdate.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
-        userToUpdate.setEmail(updatedUser.getEmail());
         userToUpdate.setRoles(updatedUser.getRoles());
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public User showId(Long id) {
-        return userRepository.getById(id);
     }
 
     @Override
