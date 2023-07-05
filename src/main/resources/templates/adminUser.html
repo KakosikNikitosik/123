@@ -84,7 +84,7 @@
                                                 <th scope="col">Delete</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="adminId">
                                             <tr th:each="user : ${users}">
                                                 <td th:text="${user.getId()}">VALUE</td>
                                                 <td th:text="${user.getFirstName()}">VALUE</td>
@@ -95,10 +95,7 @@
                                                     th:text="${role.getName()}">VALUE
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn-info" data-toggle="modal"
-                                                            th:data-target="${'#myModal' + user.id}">Edit
-                                                    </button>
-                                                    <div class="modal fade" th:id="${'myModal' + user.id}"
+                                                    <div class="modal fade" th:id="editModal"
                                                          role="dialog">
                                                         <div class="modal-dialog">
                                                             <!-- Modal content-->
@@ -109,9 +106,7 @@
                                                                             data-dismiss="modal">x
                                                                     </button>
                                                                 </div>
-                                                                <form th:method="PATCH"
-                                                                      th:action="@{/admin/{id}(id=${user.getId()})}"
-                                                                      th:object="${user}">
+                                                                <form onsubmit="editUser()">
                                                                     <div class="modal-body">
                                                                         <div class="form-group text-center">
                                                                             <label for="ID"
@@ -197,10 +192,7 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn-danger" data-toggle="modal"
-                                                            th:data-target="${'#deleteModal' + user.id}">Delete
-                                                    </button>
-                                                    <div class="modal fade" th:id="${'deleteModal' + user.id}"
+                                                    <div class="modal fade" th:id="deleteModal"
                                                          role="dialog">
                                                         <div class="modal-dialog">
                                                             <!-- Modal content-->
@@ -211,9 +203,7 @@
                                                                             data-dismiss="modal">x
                                                                     </button>
                                                                 </div>
-                                                                <form th:method="DELETE"
-                                                                      th:action="@{/admin/{id}(id=${user.getId()})}"
-                                                                      th:object="${user}">
+                                                                <form onsubmit="deleteUser()">
                                                                     <div class="modal-body">
                                                                         <div class="form-group text-center">
                                                                             <label for="inputID"
@@ -295,34 +285,34 @@
                                     <br>
                                     <div class="d-flex justify-content-center">
                                         <div class="panel-body w-25">
-                                            <form th:method="POST" th:action="@{/admin/}" th:object="${user}">
+                                            <form id="addUser">
                                                 <div class="form-group text-center">
                                                     <label for="inputName" class="font-weight-bold">First name</label>
-                                                    <input type="text" th:field="*{firstName}" class="form-control"
+                                                    <input type="text"  class="form-control"
                                                            id="inputName"
                                                            placeholder="Enter name">
                                                 </div>
                                                 <div class="form-group text-center">
                                                     <label for="inputSurname" class="font-weight-bold">Last name</label>
-                                                    <input type="text" th:field="*{lastName}" class="form-control"
+                                                    <input type="text" class="form-control"
                                                            id="inputSurname"
                                                            placeholder="Enter last name">
                                                 </div>
                                                 <div class="form-group text-center">
                                                     <label for="inputAge" class="font-weight-bold">Age</label>
-                                                    <input type="number" th:field="*{age}" class="form-control"
+                                                    <input type="number" class="form-control"
                                                            id="inputAge"
                                                            placeholder="Enter age">
                                                 </div>
                                                 <div class="form-group text-center">
                                                     <label for="inputEmail" class="font-weight-bold">Email</label>
-                                                    <input type="email" th:field="*{username}" class="form-control"
+                                                    <input type="email" class="form-control"
                                                            id="inputEmail"
                                                            placeholder="Enter email">
                                                 </div>
                                                 <div class="form-group text-center">
                                                     <label for="inputPassword" class="font-weight-bold">Password</label>
-                                                    <input type="password" th:field="*{password}" class="form-control"
+                                                    <input type="password" class="form-control"
                                                            id="inputPassword"
                                                            placeholder="Enter password">
                                                 </div>
@@ -371,7 +361,7 @@
                                         <th scope="col">Role</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="info">
                                     <tr>
                                         <td th:text="${admin.getId()}">VALUE</td>
                                         <td th:text="${admin.getFirstName()}">VALUE</td>
@@ -407,6 +397,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script type="text/javascript" src="/admin.js"></script>
 </body>
 
 </html>

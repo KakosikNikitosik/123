@@ -20,12 +20,10 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-
     @Override
     @Transactional(readOnly = true)
     public List<User> getAllUsers() {
         return userRepository.findAll();
-
     }
 
     @Override
@@ -34,7 +32,6 @@ public class UserServiceImpl implements UserService {
         User user = findUser(username);
         return user;
     }
-
 
     @Override
     @Transactional
