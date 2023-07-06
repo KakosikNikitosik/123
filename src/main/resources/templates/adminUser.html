@@ -20,7 +20,7 @@
             <div class="navbar-brand" style="color: white;">
                 <span th:text="${admin.getUsername()}" class="font-weight-bold"></span>
                 <span th:text="'with roles:'"></span>
-                <span th:each="role : ${roles}" th:text="${role.name} + ' '"></span>
+                <span th:each="role : ${roles}" th:text="${role.name.substring(5)} + ' '"></span>
             </div>
 
         </div>
@@ -397,7 +397,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<script type="text/javascript" src="/admin.js"></script>
+<script type="text/javascript" src="/static/admin.js"></script>
 </body>
 
 </html>
