@@ -11,7 +11,7 @@ import java.security.Principal;
 
 
 @Controller
-//@RequestMapping
+@RequestMapping
 public class AdminController {
     private final UserService userService;
     private final RoleService roleService;

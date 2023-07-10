@@ -26,6 +26,7 @@ public class RestApiController {
         List<User> users = userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
+
     @GetMapping("/admin/user")
     public ResponseEntity<User> getUserPage(Principal principal) {
         User user = userService.findUser(principal.getName());
@@ -33,27 +34,26 @@ public class RestApiController {
     }
 
     @GetMapping("/admin/{id}")
-    public ResponseEntity<HttpStatus> getUser(@PathVariable("id") Long id) {
-        userService.findById(id);
-        return ResponseEntity.ok(HttpStatus.OK);
+    public ResponseEntity<User> getUser(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
     }
 
     @PostMapping("/admin")
     public ResponseEntity<HttpStatus> create(@RequestBody User user) {
         userService.addUser(user);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping("/admin/{id}")
-    public ResponseEntity<HttpStatus> update(@RequestBody User user, @PathVariable("id") Long id) {
-        userService.updateUser(id, user);
-        return ResponseEntity.ok(HttpStatus.OK);
+    @PatchMapping("/admin")
+    public ResponseEntity<HttpStatus> update(@RequestBody User user) {
+        userService.updateUser(user);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/admin/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
